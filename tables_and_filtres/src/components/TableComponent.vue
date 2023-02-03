@@ -3,6 +3,9 @@
 		<table class="table">
 	<thead class="head">
 		<tr>
+			<th v-for="(column, index) in columns" :key="index" :title="column">{{ column }}</th>
+		</tr>
+		<tr>
 		<th>
 			<select class="selector"
 			@change="updateList()"
@@ -13,7 +16,8 @@
 		</select>
 		</th>
 		<th>
-			<select  class="selector" @change="updateListCant()"
+			<select  class="selector"
+			@change="updateListCant()"
 			name="cantidades"
 			id="cantidades"
 			v-model="selectedCategory">
@@ -42,7 +46,7 @@
 	</thead>
 	<tbody class="body">
 		<tr
-        v-for="(item, i) in sortedListItems"
+        v-for="(item, i) in listItems"
         :key="i">
         <td>{{ item.categoria }}</td>
         <td>{{ item.cantidad }}</td>
@@ -55,59 +59,52 @@
 </template>
 
 <script>
-import content from "./content";
 	export default {
 	name: 'TableComponent',
 	data (){
 		return {
-			categorias: ['lácteos','carnes', 'enlatados', 'verduras'],
+			categorias: ['Seleccionar Todo','lácteos','carnes', 'enlatados', 'verduras'],
 			cantidades: [2,25,52,100,10,145,289,758,2789,36,85],
 			precios: [3500,4500,35200,18000,32800,35200,9900,12360,8900,5600,12500,8450,3200],
 			productos: ['Leche colanta','Alpinito x15ml','Quesillo x1000gr','Quesillo x500gr','Yogurt griego','Libra carne res','Libra carne cerdo'],
 
-	listItems: content,
-    sortedListItems: content,
-    selectedCategory: "",
+	listItems: this.rows,
+    selectedCategory: "Seleccionar Todo",
 		}
 	},
 	mounted(){
-		this.sortedListItems = this.listItems;
 	},
 	props: {
 		columns: Array,
 		rows: Array,
 	},
-
-	components: {
-	},
-
-	computed: {
-	},
-
 	methods: {
 		updateList() {
+			if(this.selectedCategory === 'Seleccionar Todo'){
+				this.listItems = this.rows
+			}else {
 			const result = this.rows.filter(item => item.categoria === this.selectedCategory);
-			this.sortedListItems = result
+			this.listItems = result
+			}
     },
 	updateListCant() {
 			const result = this.rows.filter(item => item.cantidad === this.selectedCategory);
-			this.sortedListItems = result
+			this.listItems = result
     },
 	updateListPrecios() {
 			const result = this.rows.filter(item => item.precio === this.selectedCategory);
-			this.sortedListItems = result
+			this.listItems = result
     },
 	updateListProductos() {
 			const result = this.rows.filter(item => item.producto === this.selectedCategory);
-			this.sortedListItems = result
+			this.listItems = result
     },
 	}
 	}
 </script>
 <style lang="css">
-
 .table {
-	margin-left: 430px;
+	margin-left: 390px;
 	border-collapse: collapse;
   text-align: center;
   border: 1px solid rgb(100, 120, 20);
