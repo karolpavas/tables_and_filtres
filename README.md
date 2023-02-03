@@ -2,6 +2,6 @@
 #Download and installation
 1. Clone the repository
 2. In the project terminal 
-                              *npm install
-3. To run the project 
-                             *npm run serve
+  >*npm install*
+4. To run the project 
+  >*npm run serve*
