@@ -1,1 +1,2 @@
-# tables_and_filtres
+# Practical exercise on tables and filters
+#Download and installation
