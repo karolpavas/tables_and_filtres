@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="container">
+    <Title/>
     <Table
     :columns="head"
     :rows="data"
@@ -10,6 +11,7 @@
   <script>
 
   import Table from '../../components/TableComponent.vue'
+  import Title from '../../components/Title.vue'
   import { mapActions, mapState } from 'vuex'
   export default {
     name: 'HomeTable',
@@ -20,7 +22,8 @@
     },
 
     components: {
-      Table
+      Table,
+      Title
     },
 
     computed: {
@@ -38,5 +41,8 @@
 
   </script>
 
-  <style scoped>
+  <style lang="css">
+  .container {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+  }
   </style>
